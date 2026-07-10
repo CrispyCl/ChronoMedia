@@ -1,0 +1,41 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: chronomedia-postgres
+
+    ports:
+      - "${POSTGRES_PORT}:5432"
+
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    networks:
+      - app-network
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres-init:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+
+  redis:
+    image: redis:7
+    container_name: chronomedia-redis
+
+    ports:
+      - "${REDIS_PORT}:6379"
+
+    networks:
+      - app-network
+
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  app-network:
+    driver: bridge
