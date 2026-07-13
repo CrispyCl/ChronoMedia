@@ -1,0 +1,18 @@
+# Environment
+.env
+**/.*.env
+**/.env
+**/.env.*
+!**/.env.template
+
+# Golang
+go.work.sum
+
+# Werf
+.werf/
+**/.werf/
+.werf-deploy/
+
+# IDE
+.vscode/
+.idea/
