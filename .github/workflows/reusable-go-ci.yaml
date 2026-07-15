@@ -1,0 +1,33 @@
+name: Reusable Go CI
+
+on:
+  workflow_call:
+    inputs:
+      test_paths:
+        required: true
+        type: string
+        description: "Space-separated list of Go package paths to validate (e.g., './services/auth/...')"
+
+jobs:
+  test-and-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: "go.work"
+          cache: true
+          cache-dependency-path: "go.work"
+
+      - name: Run Go Vet
+        run: |
+          echo "Running standard go vet for: ${{ inputs.test_paths }}"
+          go vet ${{ inputs.test_paths }}
+
+      - name: Run Go Tests
+        run: |
+          echo "Running tests with race detector for: ${{ inputs.test_paths }}"
+          go test -v -race ${{ inputs.test_paths }}
