@@ -16,7 +16,7 @@ services:
     restart: unless-stopped
 
   postgres:
-    image: postgres:15
+    image: postgres:18-alpine
     container_name: chronomedia-postgres
 
     ports:
@@ -30,12 +30,12 @@ services:
       - app-network
 
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
       - ./postgres-init:/docker-entrypoint-initdb.d
     restart: unless-stopped
 
   redis:
-    image: redis:7
+    image: redis:8-alpine
     container_name: chronomedia-redis
 
     ports:
