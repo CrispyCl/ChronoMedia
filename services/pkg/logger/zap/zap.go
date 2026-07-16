@@ -68,8 +68,8 @@ func (l *zapLogger) toZapFields(fields ...logger.Field) []zap.Field {
 			zapFields[i] = zap.Error(err)
 		} else if s, ok := f.Value.(string); ok {
 			zapFields[i] = zap.String(f.Key, s)
-		} else if i, ok := f.Value.(int); ok {
-			zapFields[i] = zap.Int(f.Key, i)
+		} else if val, ok := f.Value.(int); ok {
+			zapFields[i] = zap.Int(f.Key, val)
 		} else {
 			zapFields[i] = zap.Any(f.Key, f.Value)
 		}
