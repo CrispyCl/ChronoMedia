@@ -2,14 +2,18 @@ module github.com/CrispyCl/ChronoMedia/services/auth
 
 go 1.25.0
 
+replace github.com/CrispyCl/ChronoMedia/services/pkg/logger => ../pkg/logger
+
 replace github.com/CrispyCl/ChronoMedia/services/pkg/storage/postgres => ../pkg/storage/postgres
 
 replace github.com/CrispyCl/ChronoMedia/services/pkg/storage/redis => ../pkg/storage/redis
 
 require (
+	github.com/CrispyCl/ChronoMedia/services/pkg/logger v0.0.0-00010101000000-000000000000
 	github.com/CrispyCl/ChronoMedia/services/pkg/storage/postgres v0.0.0-00010101000000-000000000000
 	github.com/CrispyCl/ChronoMedia/services/pkg/storage/redis v0.0.0-00010101000000-000000000000
 	github.com/ilyakaznacheev/cleanenv v1.5.0
+	golang.org/x/sync v0.20.0
 )
 
 require (
@@ -20,12 +24,13 @@ require (
 	github.com/jackc/pgx/v5 v5.10.0 // indirect
 	github.com/jackc/puddle/v2 v2.2.2 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
-	github.com/kr/pretty v0.3.1 // indirect
 	github.com/redis/go-redis/v9 v9.21.0 // indirect
 	github.com/rogpeppe/go-internal v1.15.0 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
-	golang.org/x/sync v0.20.0 // indirect
+	go.uber.org/multierr v1.11.0 // indirect
+	go.uber.org/zap v1.28.0 // indirect
 	golang.org/x/text v0.37.0 // indirect
+	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	olympos.io/encoding/edn v0.0.0-20201019073823-d3554ca0b0a3 // indirect
 )
