@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "github.com/CrispyCl/ChronoMedia/api/pb/go/auth/v1;authv1";
+
+enum UserRole {
+  USER_ROLE_UNSPECIFIED = 0;
+  USER_ROLE_USER        = 1;
+  USER_ROLE_ADMIN       = 2;
+}
+
+service Auth {
+  rpc Register(AuthRequest) returns (AuthResponse);
+  rpc Login(AuthRequest) returns (AuthResponse);
+  rpc RefreshToken(RefreshRequest) returns (RefreshResponse);
+  rpc Logout(LogoutRequest) returns (LogoutResponse);
+}
+
+message AuthRequest  {
+  // User email
+  string email = 1;
+  // User password (should be stored as a hash)
+  string password = 2;
+}
+
+message AuthResponse {
+  // Unique user UUID generated upon registration
+  string user_id = 1;
+  // Short-Lived stateless JWT
+  string access_token = 2;
+  // Long-Lived stateful token
+  string refresh_token = 3;
+}
+
+message RefreshRequest {
+  // Long-Lived stateful token used to rotate credentials
+  string refresh_token = 1;
+}
+
+message RefreshResponse {
+  // New short-lived stateless JWT
+  string access_token = 1;
+  // New long-lived stateful token
+  string refresh_token = 2;
+}
+
+message LogoutRequest {
+  // Target refresh token to invalidate in storage
+  string refresh_token = 1;
+}
+
+message LogoutResponse {
+  // Confirms if session was successfully removed from storage
+  bool success = 1;
+}
