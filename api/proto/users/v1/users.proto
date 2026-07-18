@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package users;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/CrispyCl/ChronoMedia/api/pb/go/users/v1;usersv1";
+
+enum UserRole {
+  USER_ROLE_UNSPECIFIED = 0;
+  USER_ROLE_USER        = 1;
+  USER_ROLE_ADMIN       = 2;
+}
+
+service Users {
+  rpc GetMe(GetMeRequest) returns (GetMeResponse);
+  rpc UpdateMe(UpdateMeRequest) returns (UpdateMeResponse);
+  rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse);
+}
+
+message UserProfile {
+  // Unique user UUID
+  string id = 1;
+  // User email
+  string email = 2;
+  // Account access role
+  UserRole role = 3;
+  // Profile public name (non-unique)
+  string username = 4;
+  // Avatar image link
+  string avatar_url = 5;
+  // Profile description/about section
+  string description = 6;
+  // Last activity timestamp
+  google.protobuf.Timestamp last_seen = 7;
+  // Account creation timestamp
+  google.protobuf.Timestamp created_at = 8;
+}
+
+message GetMeRequest {
+  // User ID is extracted from validated JWT
+}
+
+message GetMeResponse {
+  UserProfile profile = 1;
+}
+
+message UpdateMeRequest {
+  // New profile public name
+  string username = 1;
+  // New avatar image link
+  string avatar_url = 2;
+  // New profile description
+  string description = 3;
+}
+
+message UpdateMeResponse {
+  UserProfile profile = 1;
+}
+
+message GetUserProfileRequest {
+  // Target user UUID to fetch
+  string user_id = 1;
+}
+
+message GetUserProfileResponse {
+  UserProfile profile = 1;
+}
