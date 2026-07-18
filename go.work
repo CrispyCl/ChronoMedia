@@ -1,6 +1,7 @@
 go 1.25.0
 
 use (
+	./api
 	./services/pkg/jwt
 	./services/pkg/logger
 	./services/pkg/storage/postgres
