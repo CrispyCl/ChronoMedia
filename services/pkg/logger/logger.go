@@ -19,10 +19,10 @@ type Field struct {
 	Value any
 }
 
-func String(key, val string) Field      { return Field{Key: key, Value: val} }
-func Int(key string, val int) Field     { return Field{Key: key, Value: val} }
-func Error(key string, val error) Field { return Field{Key: key, Value: val} }
-func Any(key string, val any) Field     { return Field{Key: key, Value: val} }
+func String(key, val string) Field  { return Field{Key: key, Value: val} }
+func Int(key string, val int) Field { return Field{Key: key, Value: val} }
+func Error(val error) Field         { return Field{Key: "error", Value: val} }
+func Any(key string, val any) Field { return Field{Key: key, Value: val} }
 
 type Logger interface {
 	Debug(ctx context.Context, msg string, fields ...Field)

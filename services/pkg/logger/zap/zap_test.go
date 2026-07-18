@@ -74,7 +74,7 @@ func TestZapLogger_Lifecycle(t *testing.T) {
 
 		l.Debug(t.Context(), "debug msg", logger.String("str_key", "str_val"))
 		l.Info(t.Context(), "info msg", logger.Int("int_key", 42))
-		l.Warn(t.Context(), "warn msg", logger.Error("err_key", testErr))
+		l.Warn(t.Context(), "warn msg", logger.Error(testErr))
 		l.Error(t.Context(), "error msg", logger.Any("any_key", []int{1, 2}))
 
 		logs := observedLogs.All()
